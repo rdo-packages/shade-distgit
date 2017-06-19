@@ -85,6 +85,7 @@ Requires:       python-os-client-config         >= 1.27.0
 Requires:       python-requestsexceptions       >= 1.2.0
 Requires:       python-netifaces
 Requires:       python-jmespath
+Requires:       python-futures
 
 %description -n python2-%{srcname}
 shade is a simple client library for operating OpenStack clouds.
