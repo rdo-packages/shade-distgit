@@ -69,22 +69,26 @@ shade is a simple client library for operating OpenStack clouds.
 %package -n python2-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{srcname}}
-Requires:       python-dogpile-cache            >= 0.6.2
+Requires:       python-babel                    >= 2.3.4
+Requires:       python-decorator                >= 3.4.0
 Requires:       python-designateclient          >= 2.1.0
-Requires:       python-ironicclient             >= 1.11.0
+Requires:       python-dogpile-cache            >= 0.6.2
+Requires:       python-futures                  >= 3.0
 Requires:       python-glanceclient             >= 1.0.0
+Requires:       python-ipaddress                >= 1.0.7
+Requires:       python-ironicclient             >= 1.14.0
+Requires:       python-iso8601                  >= 0.1.11
+Requires:       python-jmespath                 >= 0.9.0
+Requires:       python-jsonpatch                >= 1.1
+Requires:       python-keystoneauth1            >= 3.1.0
 Requires:       python-keystoneclient           >= 1:3.8.0
+Requires:       python-munch                    >= 2.1.0
+Requires:       python-netifaces                >= 0.10.4
 Requires:       python-novaclient               >= 1:7.1.0
-Requires:       python-six
-Requires:       python-ipaddress
-Requires:       python-jsonpatch
-Requires:       python-decorator
-Requires:       python-munch
-Requires:       python-keystoneauth1            >= 2.20.0
-Requires:       python-os-client-config         >= 1.27.0
+Requires:       python-os-client-config         >= 1.28.0
+Requires:       python-pbr                      >= 2.0.0
 Requires:       python-requestsexceptions       >= 1.2.0
-Requires:       python-netifaces
-Requires:       python-jmespath
+Requires:       python-six                      >= 1.9.0
 
 %description -n python2-%{srcname}
 shade is a simple client library for operating OpenStack clouds.
@@ -93,21 +97,24 @@ shade is a simple client library for operating OpenStack clouds.
 %package -n python3-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{srcname}}
-Requires:       python3-dogpile-cache           >= 0.6.2
+Requires:       python3-babel                   >= 2.3.4
+Requires:       python3-decorator               >= 3.4.0
 Requires:       python3-designateclient         >= 2.1.0
-Requires:       python3-ironicclient            >= 1.11.0
+Requires:       python3-dogpile-cache           >= 0.6.2
 Requires:       python3-glanceclient            >= 1.0.0
+Requires:       python3-ironicclient            >= 1.14.0
+Requires:       python3-iso8601                 >= 0.1.11
+Requires:       python3-jmespath                >= 0.9.0
+Requires:       python3-jsonpatch               >= 1.1
+Requires:       python3-keystoneauth1           >= 3.1.0
 Requires:       python3-keystoneclient          >= 1:3.8.0
+Requires:       python3-munch                   >= 2.1.0
+Requires:       python3-netifaces               >= 0.10.4
 Requires:       python3-novaclient              >= 1:7.1.0
-Requires:       python3-six
-Requires:       python3-ipaddress
-Requires:       python3-jsonpatch
-Requires:       python3-decorator
-Requires:       python3-munch
-Requires:       python3-keystoneauth1           >= 2.20.0
-Requires:       python3-os-client-config        >= 1.27.0
+Requires:       python3-os-client-config        >= 1.28.0
+Requires:       python3-pbr                     >= 2.0.0
 Requires:       python3-requestsexceptions      >= 1.2.0
-Requires:       python3-netifaces
+Requires:       python3-six                     >= 1.9.0
 
 %description -n python3-%{srcname}
 shade is a simple client library for operating OpenStack clouds.
