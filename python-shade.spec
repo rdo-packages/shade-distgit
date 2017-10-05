@@ -19,6 +19,8 @@
 
 %global srcname shade
 
+%global common_desc shade is a simple client library for operating OpenStack clouds.
+
 Name:           python-%{srcname}
 Version:        XXX
 Release:        XXX
@@ -64,7 +66,7 @@ BuildRequires:  python3-devel
 %endif # if with_python3
 
 %description
-shade is a simple client library for operating OpenStack clouds.
+%{common_desc}
 
 %package -n python2-%{srcname}
 Summary:        %{summary}
@@ -87,7 +89,7 @@ Requires:       python-netifaces
 Requires:       python-jmespath
 
 %description -n python2-%{srcname}
-shade is a simple client library for operating OpenStack clouds.
+%{common_desc}
 
 %if 0%{?with_python3}
 %package -n python3-%{srcname}
@@ -110,7 +112,7 @@ Requires:       python3-requestsexceptions      >= 1.2.0
 Requires:       python3-netifaces
 
 %description -n python3-%{srcname}
-shade is a simple client library for operating OpenStack clouds.
+%{common_desc}
 %endif
 
 %prep
