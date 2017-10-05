@@ -20,7 +20,7 @@
 %global srcname shade
 
 Name:           python-%{srcname}
-Version:        1.23.0
+Version:        1.22.2
 Release:        1%{?dist}
 Summary:        Python module for operating OpenStack clouds
 
@@ -177,6 +177,6 @@ ln -s shade-inventory-%{python2_shortver} \
 %endif
 
 %changelog
-* Thu Oct 05 2017 Haikel Guemar <hguemar@fedoraproject.org> 1.23.0-1
-- Update to 1.23.0
+* Thu Oct 05 2017 Haikel Guemar <hguemar@fedoraproject.org> 1.22.2-1
+- Update to 1.22.2
 
