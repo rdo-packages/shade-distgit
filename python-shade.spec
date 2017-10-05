@@ -20,8 +20,8 @@
 %global srcname shade
 
 Name:           python-%{srcname}
-Version:        XXX
-Release:        XXX
+Version:        1.23.0
+Release:        1%{?dist}
 Summary:        Python module for operating OpenStack clouds
 
 License:        ASL 2.0
@@ -177,3 +177,6 @@ ln -s shade-inventory-%{python2_shortver} \
 %endif
 
 %changelog
+* Thu Oct 05 2017 Haikel Guemar <hguemar@fedoraproject.org> 1.23.0-1
+- Update to 1.23.0
+
