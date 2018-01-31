@@ -37,8 +37,15 @@ BuildRequires:  python2-pbr
 BuildRequires:  python2-devel
 
 # test-requirements.txt
+BuildRequires: python2-fixtures
 BuildRequires: python2-mock
-BuildRequires: python2-betamax
+BuildRequires: python2-subunit
+BuildRequires: python2-oslotest
+BuildRequires: python2-requests-mock
+BuildRequires: python2-testscenarios
+BuildRequires: python2-testtools
+BuildRequires: python2-stestr
+BuildRequires: python2-futures
 
 # requirements.txt
 BuildRequires:  python2-six
@@ -64,9 +71,6 @@ BuildRequires:  python-ipaddress
 BuildRequires:  python-requests-mock
 %endif
 
-%if 0%{?with_python3}
-BuildRequires:  python3-devel
-%endif # if with_python3
 
 %description
 %{common_desc}
@@ -104,6 +108,9 @@ Requires:       python-netifaces                 >= 0.10.4
 %package -n python3-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{srcname}}
+
+BuildRequires:  python3-devel
+
 Requires:       python3-decorator               >= 3.4.0
 Requires:       python3-dogpile-cache           >= 0.6.2
 Requires:       python3-iso8601                 >= 0.1.11
@@ -123,6 +130,7 @@ Requires:       python3-six                     >= 1.10.0
 
 %prep
 %autosetup -n %{srcname}-%{upstream_version}
+rm -f *requirements.txt
 
 %build
 %py2_build
@@ -131,12 +139,10 @@ Requires:       python3-six                     >= 1.10.0
 %endif
 
 %check
-#%{__python2} setup.py testr
-# cleanup testrepository
-#rm -rf .testrepository
-#%if 0%{?with_python3}
-#%{__python3} setup.py testr
-#%endif
+%{__python2} setup.py test
+%if 0%{?with_python3}
+%{__python3} setup.py test
+%endif
 
 %install
 %py2_install
