@@ -34,13 +34,17 @@ BuildArch:      noarch
 
 BuildRequires:  git
 BuildRequires:  python-pbr
-BuildRequires:  python2-devel
 
 # test-requirements.txt
+BuildRequires: python-fixtures
 BuildRequires: python-mock
-BuildRequires: python-testrepository
+BuildRequires: python-subunit
+BuildRequires: python-oslotest
+BuildRequires: python-requests-mock
 BuildRequires: python-testscenarios
-BuildRequires: python-betamax
+BuildRequires: python-testtools
+BuildRequires: python-stestr
+BuildRequires: python-futures
 
 # requirements.txt
 BuildRequires:  python-dogpile-cache
@@ -56,9 +60,6 @@ BuildRequires:  python-netifaces
 BuildRequires:  python2-jmespath
 BuildRequires:  python-requests-mock
 
-%if 0%{?with_python3}
-BuildRequires:  python3-devel
-%endif # if with_python3
 
 %description
 %{common_desc}
@@ -66,20 +67,23 @@ BuildRequires:  python3-devel
 %package -n python2-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{srcname}}
+
+BuildRequires:  python2-devel
+
 Requires:       python-decorator                >= 3.4.0
 Requires:       python-dogpile-cache            >= 0.6.2
 Requires:       python-futures                  >= 3.0
-Requires:       python-ipaddress                >= 1.0.7
+Requires:       python-ipaddress                >= 1.0.16
 Requires:       python-iso8601                  >= 0.1.11
 Requires:       python-jmespath                 >= 0.9.0
-Requires:       python-jsonpatch                >= 1.1
-Requires:       python-keystoneauth1            >= 3.2.0
-Requires:       python-munch                    >= 2.0.2
+Requires:       python-jsonpatch                >= 1.2
+Requires:       python-keystoneauth1            >= 3.3.0
+Requires:       python-munch                    >= 2.1.0
 Requires:       python-netifaces                >= 0.10.4
 Requires:       python-os-client-config         >= 1.28.0
 Requires:       python-pbr                      >= 2.0.0
 Requires:       python-requestsexceptions       >= 1.2.0
-Requires:       python-six                      >= 1.9.0
+Requires:       python-six                      >= 1.10.0
 
 %description -n python2-%{srcname}
 %{common_desc}
@@ -88,18 +92,21 @@ Requires:       python-six                      >= 1.9.0
 %package -n python3-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{srcname}}
+
+BuildRequires:  python3-devel
+
 Requires:       python3-decorator               >= 3.4.0
 Requires:       python3-dogpile-cache           >= 0.6.2
 Requires:       python3-iso8601                 >= 0.1.11
 Requires:       python3-jmespath                >= 0.9.0
-Requires:       python3-jsonpatch               >= 1.1
-Requires:       python3-keystoneauth1           >= 3.1.0
+Requires:       python3-jsonpatch               >= 1.16
+Requires:       python3-keystoneauth1           >= 3.3.0
 Requires:       python3-munch                   >= 2.1.0
 Requires:       python3-netifaces               >= 0.10.4
 Requires:       python3-os-client-config        >= 1.28.0
 Requires:       python3-pbr                     >= 2.0.0
 Requires:       python3-requestsexceptions      >= 1.2.0
-Requires:       python3-six                     >= 1.9.0
+Requires:       python3-six                     >= 1.10.0
 
 %description -n python3-%{srcname}
 %{common_desc}
@@ -107,6 +114,7 @@ Requires:       python3-six                     >= 1.9.0
 
 %prep
 %autosetup -n %{srcname}-%{upstream_version}
+rm -f *requirements.txt
 
 %build
 %py2_build
@@ -115,12 +123,10 @@ Requires:       python3-six                     >= 1.9.0
 %endif
 
 %check
-#%{__python2} setup.py testr
-# cleanup testrepository
-#rm -rf .testrepository
-#%if 0%{?with_python3}
-#%{__python3} setup.py testr
-#%endif
+%{__python2} setup.py test
+%if 0%{?with_python3}
+%{__python3} setup.py test
+%endif
 
 %install
 %py2_install
