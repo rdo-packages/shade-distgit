@@ -33,28 +33,36 @@ Source0:        https://tarballs.openstack.org/shade/shade-%{upstream_version}.t
 BuildArch:      noarch
 
 BuildRequires:  git
-BuildRequires:  python-pbr
+BuildRequires:  python2-pbr
 BuildRequires:  python2-devel
 
 # test-requirements.txt
-BuildRequires: python-mock
-BuildRequires: python-testrepository
-BuildRequires: python-testscenarios
-BuildRequires: python-betamax
+BuildRequires: python2-mock
+BuildRequires: python2-betamax
 
 # requirements.txt
-BuildRequires:  python-dogpile-cache
-BuildRequires:  python-six
-BuildRequires:  python-ipaddress
-BuildRequires:  python-jsonpatch
-BuildRequires:  python-decorator
-BuildRequires:  python-munch
-BuildRequires:  python-keystoneauth1
-BuildRequires:  python-os-client-config
+BuildRequires:  python2-six
+BuildRequires:  python2-jsonpatch
+BuildRequires:  python2-decorator
+BuildRequires:  python2-munch
+BuildRequires:  python2-keystoneauth1
+BuildRequires:  python2-os-client-config
 BuildRequires:  python2-requestsexceptions
-BuildRequires:  python-netifaces
+BuildRequires:  python2-netifaces
 BuildRequires:  python2-jmespath
+%if 0%{?fedora} > 0
+BuildRequires:  python2-testrepository
+BuildRequires:  python2-testscenarios
+BuildRequires:  python2-dogpile-cache
+BuildRequires:  python2-ipaddress
+BuildRequires:  python2-requests-mock
+%else
+BuildRequires:  python-testrepository
+BuildRequires:  python-testscenarios
+BuildRequires:  python-dogpile-cache
+BuildRequires:  python-ipaddress
 BuildRequires:  python-requests-mock
+%endif
 
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
@@ -66,20 +74,26 @@ BuildRequires:  python3-devel
 %package -n python2-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{srcname}}
-Requires:       python-decorator                >= 3.4.0
-Requires:       python-dogpile-cache            >= 0.6.2
-Requires:       python-futures                  >= 3.0
-Requires:       python-ipaddress                >= 1.0.7
-Requires:       python-iso8601                  >= 0.1.11
-Requires:       python-jmespath                 >= 0.9.0
-Requires:       python-jsonpatch                >= 1.1
-Requires:       python-keystoneauth1            >= 3.2.0
-Requires:       python-munch                    >= 2.0.2
-Requires:       python-netifaces                >= 0.10.4
-Requires:       python-os-client-config         >= 1.28.0
-Requires:       python-pbr                      >= 2.0.0
-Requires:       python-requestsexceptions       >= 1.2.0
-Requires:       python-six                      >= 1.9.0
+Requires:       python2-decorator                >= 3.4.0
+Requires:       python2-iso8601                  >= 0.1.11
+Requires:       python2-jmespath                 >= 0.9.0
+Requires:       python2-jsonpatch                >= 1.16
+Requires:       python2-keystoneauth1            >= 3.3.0
+Requires:       python2-munch                    >= 2.1.0
+Requires:       python2-netifaces                >= 0.10.4
+Requires:       python2-os-client-config         >= 1.28.0
+Requires:       python2-pbr                      >= 2.0.0
+Requires:       python2-requestsexceptions       >= 1.2.0
+Requires:       python2-six                      >= 1.10.0
+%if 0%{?fedora} > 0
+Requires:       python2-dogpile-cache            >= 0.6.2
+Requires:       python2-futures                  >= 3.0
+Requires:       python2-ipaddress                >= 1.0.16
+%else
+Requires:       python-dogpile-cache             >= 0.6.2
+Requires:       python-futures                   >= 3.0
+Requires:       python-ipaddress                 >= 1.0.16
+%endif
 
 %description -n python2-%{srcname}
 %{common_desc}
@@ -92,14 +106,14 @@ Requires:       python3-decorator               >= 3.4.0
 Requires:       python3-dogpile-cache           >= 0.6.2
 Requires:       python3-iso8601                 >= 0.1.11
 Requires:       python3-jmespath                >= 0.9.0
-Requires:       python3-jsonpatch               >= 1.1
-Requires:       python3-keystoneauth1           >= 3.1.0
+Requires:       python3-jsonpatch               >= 1.16
+Requires:       python3-keystoneauth1           >= 3.3.0
 Requires:       python3-munch                   >= 2.1.0
 Requires:       python3-netifaces               >= 0.10.4
 Requires:       python3-os-client-config        >= 1.28.0
 Requires:       python3-pbr                     >= 2.0.0
 Requires:       python3-requestsexceptions      >= 1.2.0
-Requires:       python3-six                     >= 1.9.0
+Requires:       python3-six                     >= 1.10.0
 
 %description -n python3-%{srcname}
 %{common_desc}
