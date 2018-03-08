@@ -22,7 +22,7 @@
 %global common_desc shade is a simple client library for operating OpenStack clouds.
 
 Name:           python-%{srcname}
-Version:        1.27.0
+Version:        1.27.1
 Release:        1%{?dist}
 Summary:        Python module for operating OpenStack clouds
 
@@ -178,6 +178,9 @@ ln -s shade-inventory-%{python2_shortver} \
 %endif
 
 %changelog
+* Thu Mar 08 2018 RDO <dev@lists.rdoproject.org> 1.27.1-1
+- Update to 1.27.1
+
 * Thu Feb 22 2018 RDO <dev@lists.rdoproject.org> 1.27.0-1
 - Update to 1.27.0
 
