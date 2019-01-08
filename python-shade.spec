@@ -1,14 +1,14 @@
 # Macros for py2/py3 compatibility
 %if 0%{?fedora} || 0%{?rhel} > 7
-%global pydefault 3
+%global pyver 3
 %else
-%global pydefault 2
+%global pyver 2
 %endif
 
-%global pydefault_bin python%{pydefault}
-%global pydefault_sitelib %python%{pydefault}_sitelib
-%global pydefault_install %py%{pydefault}_install
-%global pydefault_build %py%{pydefault}_build
+%global pyver_bin python%{pyver}
+%global pyver_sitelib %python%{pyver}_sitelib
+%global pyver_install %py%{pyver}_install
+%global pyver_build %py%{pyver}_build
 # End of macros for py2/py3 compatibility
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
@@ -29,89 +29,89 @@ Source0:        https://tarballs.openstack.org/shade/shade-%{upstream_version}.t
 BuildArch:      noarch
 
 BuildRequires:  git
-BuildRequires:  python%{pydefault}-pbr
-BuildRequires:  python%{pydefault}-devel
+BuildRequires:  python%{pyver}-pbr
+BuildRequires:  python%{pyver}-devel
 
 # test-requirements.txt
-BuildRequires: python%{pydefault}-mock
-BuildRequires: python%{pydefault}-betamax
+BuildRequires: python%{pyver}-mock
+BuildRequires: python%{pyver}-betamax
 
 # requirements.txt
-BuildRequires:  python%{pydefault}-six
-BuildRequires:  python%{pydefault}-jsonpatch
-BuildRequires:  python%{pydefault}-keystoneauth1
-BuildRequires:  python%{pydefault}-munch
-BuildRequires:  python%{pydefault}-os-client-config
-BuildRequires:  python%{pydefault}-requestsexceptions
-BuildRequires:  python%{pydefault}-jmespath
-BuildRequires:  python%{pydefault}-testrepository
-BuildRequires:  python%{pydefault}-testscenarios
-%if %{pydefault} == 2
+BuildRequires:  python%{pyver}-six
+BuildRequires:  python%{pyver}-jsonpatch
+BuildRequires:  python%{pyver}-keystoneauth1
+BuildRequires:  python%{pyver}-munch
+BuildRequires:  python%{pyver}-os-client-config
+BuildRequires:  python%{pyver}-requestsexceptions
+BuildRequires:  python%{pyver}-jmespath
+BuildRequires:  python%{pyver}-testrepository
+BuildRequires:  python%{pyver}-testscenarios
+%if %{pyver} == 2
 BuildRequires:  python-decorator
 BuildRequires:  python-netifaces
 BuildRequires:  python-dogpile-cache
 BuildRequires:  python-ipaddress
 BuildRequires:  python-requests-mock
 %else
-BuildRequires:  python%{pydefault}-decorator
-BuildRequires:  python%{pydefault}-netifaces
-BuildRequires:  python%{pydefault}-dogpile-cache
-BuildRequires:  python%{pydefault}-requests-mock
+BuildRequires:  python%{pyver}-decorator
+BuildRequires:  python%{pyver}-netifaces
+BuildRequires:  python%{pyver}-dogpile-cache
+BuildRequires:  python%{pyver}-requests-mock
 %endif
 
 %description
 %{common_desc}
 
-%package -n python%{pydefault}-%{srcname}
+%package -n python%{pyver}-%{srcname}
 Summary:        %{summary}
-%{?python_provide:%python_provide python%{pydefault}-%{srcname}}
-Requires:       python%{pydefault}-iso8601                  >= 0.1.11
-Requires:       python%{pydefault}-jmespath                 >= 0.9.0
-Requires:       python%{pydefault}-jsonpatch                >= 1.16
-Requires:       python%{pydefault}-keystoneauth1            >= 3.3.0
-Requires:       python%{pydefault}-munch                    >= 2.1.0
-Requires:       python%{pydefault}-os-client-config         >= 1.28.0
-Requires:       python%{pydefault}-openstacksdk             >= 0.15.0
-Requires:       python%{pydefault}-pbr                      >= 2.0.0
-Requires:       python%{pydefault}-requestsexceptions       >= 1.2.0
-Requires:       python%{pydefault}-six                      >= 1.10.0
-%if %{pydefault} == 2
+%{?python_provide:%python_provide python%{pyver}-%{srcname}}
+Requires:       python%{pyver}-iso8601                  >= 0.1.11
+Requires:       python%{pyver}-jmespath                 >= 0.9.0
+Requires:       python%{pyver}-jsonpatch                >= 1.16
+Requires:       python%{pyver}-keystoneauth1            >= 3.3.0
+Requires:       python%{pyver}-munch                    >= 2.1.0
+Requires:       python%{pyver}-os-client-config         >= 1.28.0
+Requires:       python%{pyver}-openstacksdk             >= 0.15.0
+Requires:       python%{pyver}-pbr                      >= 2.0.0
+Requires:       python%{pyver}-requestsexceptions       >= 1.2.0
+Requires:       python%{pyver}-six                      >= 1.10.0
+%if %{pyver} == 2
 Requires:       python-dogpile-cache             >= 0.6.2
 Requires:       python-futures                   >= 3.0
 Requires:       python-ipaddress                 >= 1.0.16
 Requires:       python-decorator                 >= 3.4.0
 Requires:       python-netifaces                 >= 0.10.4
 %else
-Requires:       python%{pydefault}-dogpile-cache            >= 0.6.2
-Requires:       python%{pydefault}-decorator                >= 3.4.0
-Requires:       python%{pydefault}-netifaces                >= 0.10.4
+Requires:       python%{pyver}-dogpile-cache            >= 0.6.2
+Requires:       python%{pyver}-decorator                >= 3.4.0
+Requires:       python%{pyver}-netifaces                >= 0.10.4
 %endif
 
-%description -n python%{pydefault}-%{srcname}
+%description -n python%{pyver}-%{srcname}
 %{common_desc}
 
 %prep
 %autosetup -n %{srcname}-%{upstream_version}
 
 %build
-%pydefault_build
+%pyver_build
 
 %check
-#PYTHON=%{pydefault_bin} %{pydefault_bin} setup.py testr
+#PYTHON=%{pyver_bin} %{pyver_bin} setup.py testr
 
 %install
-%pydefault_install
+%pyver_install
 mv $RPM_BUILD_ROOT%{_bindir}/shade-inventory \
-        $RPM_BUILD_ROOT%{_bindir}/shade-inventory-%{pydefault}
-ln -s shade-inventory-%{pydefault} \
+        $RPM_BUILD_ROOT%{_bindir}/shade-inventory-%{pyver}
+ln -s shade-inventory-%{pyver} \
         $RPM_BUILD_ROOT%{_bindir}/shade-inventory
 
-%files -n python%{pydefault}-%{srcname}
+%files -n python%{pyver}-%{srcname}
 %license LICENSE
 %doc README.rst AUTHORS
-%{pydefault_sitelib}/shade*
+%{pyver_sitelib}/shade*
 
-%{_bindir}/shade-inventory-%{pydefault}
+%{_bindir}/shade-inventory-%{pyver}
 %{_bindir}/shade-inventory
 
 %changelog
