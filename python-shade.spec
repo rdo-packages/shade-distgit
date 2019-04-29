@@ -20,7 +20,7 @@
 %global srcname shade
 
 Name:           python-%{srcname}
-Version:        1.22.2
+Version:        1.22.3
 Release:        1%{?dist}
 Summary:        Python module for operating OpenStack clouds
 
@@ -177,6 +177,9 @@ ln -s shade-inventory-%{python2_shortver} \
 %endif
 
 %changelog
+* Mon Apr 29 2019 RDO <dev@lists.rdoproject.org> 1.22.3-1
+- Update to 1.22.3
+
 * Thu Oct 05 2017 Haikel Guemar <hguemar@fedoraproject.org> 1.22.2-1
 - Update to 1.22.2
 
