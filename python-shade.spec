@@ -38,7 +38,6 @@ BuildRequires: python%{pyver}-betamax
 
 # requirements.txt
 BuildRequires:  python%{pyver}-six
-BuildRequires:  python%{pyver}-jsonpatch
 BuildRequires:  python%{pyver}-keystoneauth1
 BuildRequires:  python%{pyver}-munch
 BuildRequires:  python%{pyver}-os-client-config
@@ -46,18 +45,10 @@ BuildRequires:  python%{pyver}-requestsexceptions
 BuildRequires:  python%{pyver}-jmespath
 BuildRequires:  python%{pyver}-testrepository
 BuildRequires:  python%{pyver}-testscenarios
-%if %{pyver} == 2
-BuildRequires:  python-decorator
-BuildRequires:  python-netifaces
-BuildRequires:  python-dogpile-cache
-BuildRequires:  python-ipaddress
-BuildRequires:  python-requests-mock
-%else
 BuildRequires:  python%{pyver}-decorator
 BuildRequires:  python%{pyver}-netifaces
 BuildRequires:  python%{pyver}-dogpile-cache
 BuildRequires:  python%{pyver}-requests-mock
-%endif
 
 %description
 %{common_desc}
@@ -65,9 +56,7 @@ BuildRequires:  python%{pyver}-requests-mock
 %package -n python%{pyver}-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python%{pyver}-%{srcname}}
-Requires:       python%{pyver}-iso8601                  >= 0.1.11
 Requires:       python%{pyver}-jmespath                 >= 0.9.0
-Requires:       python%{pyver}-jsonpatch                >= 1.16
 Requires:       python%{pyver}-keystoneauth1            >= 3.3.0
 Requires:       python%{pyver}-munch                    >= 2.1.0
 Requires:       python%{pyver}-os-client-config         >= 1.28.0
@@ -75,17 +64,9 @@ Requires:       python%{pyver}-openstacksdk             >= 0.15.0
 Requires:       python%{pyver}-pbr                      >= 2.0.0
 Requires:       python%{pyver}-requestsexceptions       >= 1.2.0
 Requires:       python%{pyver}-six                      >= 1.10.0
-%if %{pyver} == 2
-Requires:       python-dogpile-cache             >= 0.6.2
-Requires:       python-futures                   >= 3.0
-Requires:       python-ipaddress                 >= 1.0.16
-Requires:       python-decorator                 >= 3.4.0
-Requires:       python-netifaces                 >= 0.10.4
-%else
 Requires:       python%{pyver}-dogpile-cache            >= 0.6.2
 Requires:       python%{pyver}-decorator                >= 3.4.0
 Requires:       python%{pyver}-netifaces                >= 0.10.4
-%endif
 
 %description -n python%{pyver}-%{srcname}
 %{common_desc}
