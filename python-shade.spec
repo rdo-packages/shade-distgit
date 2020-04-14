@@ -1,15 +1,3 @@
-# Macros for py2/py3 compatibility
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global pyver 3
-%else
-%global pyver 2
-%endif
-
-%global pyver_bin python%{pyver}
-%global pyver_sitelib %python%{pyver}_sitelib
-%global pyver_install %py%{pyver}_install
-%global pyver_build %py%{pyver}_build
-# End of macros for py2/py3 compatibility
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
@@ -29,89 +17,70 @@ Source0:        https://tarballs.openstack.org/shade/shade-%{upstream_version}.t
 BuildArch:      noarch
 
 BuildRequires:  git
-BuildRequires:  python%{pyver}-pbr
-BuildRequires:  python%{pyver}-devel
+BuildRequires:  python3-pbr
+BuildRequires:  python3-devel
 
 # test-requirements.txt
-BuildRequires: python%{pyver}-mock
-BuildRequires: python%{pyver}-betamax
+BuildRequires: python3-mock
+BuildRequires: python3-betamax
 
 # requirements.txt
-BuildRequires:  python%{pyver}-six
-BuildRequires:  python%{pyver}-jsonpatch
-BuildRequires:  python%{pyver}-keystoneauth1
-BuildRequires:  python%{pyver}-munch
-BuildRequires:  python%{pyver}-os-client-config
-BuildRequires:  python%{pyver}-requestsexceptions
-BuildRequires:  python%{pyver}-jmespath
-BuildRequires:  python%{pyver}-testrepository
-BuildRequires:  python%{pyver}-testscenarios
-%if %{pyver} == 2
-BuildRequires:  python-decorator
-BuildRequires:  python-netifaces
-BuildRequires:  python-dogpile-cache
-BuildRequires:  python-ipaddress
-BuildRequires:  python-requests-mock
-%else
-BuildRequires:  python%{pyver}-decorator
-BuildRequires:  python%{pyver}-netifaces
-BuildRequires:  python%{pyver}-dogpile-cache
-BuildRequires:  python%{pyver}-requests-mock
-%endif
+BuildRequires:  python3-six
+BuildRequires:  python3-keystoneauth1
+BuildRequires:  python3-munch
+BuildRequires:  python3-os-client-config
+BuildRequires:  python3-requestsexceptions
+BuildRequires:  python3-jmespath
+BuildRequires:  python3-testrepository
+BuildRequires:  python3-testscenarios
+BuildRequires:  python3-decorator
+BuildRequires:  python3-netifaces
+BuildRequires:  python3-dogpile-cache
+BuildRequires:  python3-requests-mock
 
 %description
 %{common_desc}
 
-%package -n python%{pyver}-%{srcname}
+%package -n python3-%{srcname}
 Summary:        %{summary}
-%{?python_provide:%python_provide python%{pyver}-%{srcname}}
-Requires:       python%{pyver}-iso8601                  >= 0.1.11
-Requires:       python%{pyver}-jmespath                 >= 0.9.0
-Requires:       python%{pyver}-jsonpatch                >= 1.16
-Requires:       python%{pyver}-keystoneauth1            >= 3.3.0
-Requires:       python%{pyver}-munch                    >= 2.1.0
-Requires:       python%{pyver}-os-client-config         >= 1.28.0
-Requires:       python%{pyver}-openstacksdk             >= 0.15.0
-Requires:       python%{pyver}-pbr                      >= 2.0.0
-Requires:       python%{pyver}-requestsexceptions       >= 1.2.0
-Requires:       python%{pyver}-six                      >= 1.10.0
-%if %{pyver} == 2
-Requires:       python-dogpile-cache             >= 0.6.2
-Requires:       python-futures                   >= 3.0
-Requires:       python-ipaddress                 >= 1.0.16
-Requires:       python-decorator                 >= 3.4.0
-Requires:       python-netifaces                 >= 0.10.4
-%else
-Requires:       python%{pyver}-dogpile-cache            >= 0.6.2
-Requires:       python%{pyver}-decorator                >= 3.4.0
-Requires:       python%{pyver}-netifaces                >= 0.10.4
-%endif
+%{?python_provide:%python_provide python3-%{srcname}}
+Requires:       python3-jmespath                 >= 0.9.0
+Requires:       python3-keystoneauth1            >= 3.3.0
+Requires:       python3-munch                    >= 2.1.0
+Requires:       python3-os-client-config         >= 1.28.0
+Requires:       python3-openstacksdk             >= 0.15.0
+Requires:       python3-pbr                      >= 2.0.0
+Requires:       python3-requestsexceptions       >= 1.2.0
+Requires:       python3-six                      >= 1.10.0
+Requires:       python3-dogpile-cache            >= 0.6.2
+Requires:       python3-decorator                >= 3.4.0
+Requires:       python3-netifaces                >= 0.10.4
 
-%description -n python%{pyver}-%{srcname}
+%description -n python3-%{srcname}
 %{common_desc}
 
 %prep
 %autosetup -n %{srcname}-%{upstream_version}
 
 %build
-%pyver_build
+%py3_build
 
 %check
-#PYTHON=%{pyver_bin} %{pyver_bin} setup.py testr
+#PYTHON=%{__python3} %{__python3} setup.py testr
 
 %install
-%pyver_install
+%py3_install
 mv $RPM_BUILD_ROOT%{_bindir}/shade-inventory \
-        $RPM_BUILD_ROOT%{_bindir}/shade-inventory-%{pyver}
-ln -s shade-inventory-%{pyver} \
+        $RPM_BUILD_ROOT%{_bindir}/shade-inventory-3
+ln -s shade-inventory-3 \
         $RPM_BUILD_ROOT%{_bindir}/shade-inventory
 
-%files -n python%{pyver}-%{srcname}
+%files -n python3-%{srcname}
 %license LICENSE
 %doc README.rst AUTHORS
-%{pyver_sitelib}/shade*
+%{python3_sitelib}/shade*
 
-%{_bindir}/shade-inventory-%{pyver}
+%{_bindir}/shade-inventory-3
 %{_bindir}/shade-inventory
 
 %changelog
