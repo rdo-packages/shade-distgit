@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
+%global sources_gpg_sign 0xbba3b1e67a7303dd1769d34595bf2e4d09004514
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
@@ -8,8 +8,8 @@
 %global common_desc shade is a simple client library for operating OpenStack clouds.
 
 Name:           python-%{srcname}
-Version:        XXX
-Release:        XXX
+Version:        1.33.0
+Release:        1%{?dist}
 Summary:        Python module for operating OpenStack clouds
 
 License:        ASL 2.0
@@ -101,3 +101,6 @@ ln -s shade-inventory-3 \
 %{_bindir}/shade-inventory
 
 %changelog
+* Thu Mar 17 2022 RDO <dev@lists.rdoproject.org> 1.33.0-1
+- Update to 1.33.0
+
