@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c54d04_87561ba2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2023-07-20T14:02:45Z",
+      "side": 1,
+      "message": "it looks like the data files in tests/ directory are not included.\nOne way to fix this to add them in MANIFEST.in file like we did in oslo-sphinx [1].\nAnother way is to play with \"include_package_data\" and \"package_data\" [2] in setup.cfg\n\n[1] https://review.rdoproject.org/r/c/openstack/oslo-sphinx-distgit/+/49077/5/python-oslo-sphinx.spec#65\n[2] https://setuptools.pypa.io/en/latest/userguide/datafiles.html",
+      "revId": "47da0078542230a2051e292318d0578988606ae2",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
